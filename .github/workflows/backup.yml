@@ -1,23 +1,20 @@
-name: Create PR
+name: Backup Repository
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  pull-request:
+  backup:
     runs-on: ubuntu-latest
-    name: A job to create a PR in a separate repo
     steps:
-      - name: Checkout
+      - name: Checkout source repo
         uses: actions/checkout@v3
 
-      - name: Create Pull Request in backup repo
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.API_TOKEN_GITHUB }}
-          push-to-fork: S1mp3r/backup-engineering-prompt-course
-          base: main
-          branch: main
-          title: "Backup from main"
-          body: "Atualização automática do repositório original."
+      - name: Push to backup repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git remote add backup https://x-access-token:${{ secrets.API_TOKEN_GITHUB }}@github.com/S1mp3r/backup-engineering-prompt-course.git
+          git push --force backup main
