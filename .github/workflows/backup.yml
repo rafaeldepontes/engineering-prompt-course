@@ -1,23 +1,23 @@
 name: Create PR
 
 on:
-    push:
-        branches: [ main ]
+  push:
+    branches: [ main ]
 
 jobs:
   pull-request:
     runs-on: ubuntu-latest
-    container: pandoc/latex
     name: A job to create a PR in a separate repo
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Repo PR step
-        uses: ./ 
-        env:
-          GH_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
+
+      - name: Create Pull Request in backup repo
+        uses: peter-evans/create-pull-request@v6
         with:
-            source_directory: ./ 
-            destination_repo: 'backup-engineering-prompt-course'
-            destination_owner: 'S1mp3r'
-            destination_base_branch: main
+          token: ${{ secrets.API_TOKEN_GITHUB }}
+          push-to-fork: S1mp3r/backup-engineering-prompt-course
+          base: main
+          branch: main
+          title: "Backup from main"
+          body: "Atualização automática do repositório original."
