@@ -1,8 +1,5 @@
 {
   "version": 2,
   "builds": [{ "src": "main-page.html", "use": "@vercel/static" }],
-  "routes": [{ "src": "/.*", "dest": "/main-page.html.html" }],
-  "redirects": [
-    { "source": "/", "destination": "/main-page.html", "permanent": false }
-  ]
+  "routes": [{ "src": "/.*", "dest": "/main-page.html.html" }]
 }
