@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Curso: Engenharia de Prompt - Unifor</title>
+    <meta
+      name="description"
+      content="Aulas e prompts do curso de Engenharia de Prompt. Página estática para visualizar vídeos e copiar prompts."
+    />
+    <script>
+      window.tailwind = window.tailwind || {};
+      window.tailwind.config = { darkMode: "class" };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Modificar para usar so o tailwind quando for para o Vercel */
+      .video-aspect {
+        padding-top: 56.25%;
+        position: relative;
+      }
+      .video-aspect iframe,
+      .video-aspect video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .prompt-card {
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+      }
+      .prompt-card:active {
+        transform: translateY(2px);
+      }
+    </style>
+  </head>
+  <body
+    class="antialiased bg-gray-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100"
+  >
+    <div class="min-h-screen flex">
+      <!-- Sidebar, favor não mexer -->
+      <aside
+        class="w-72 bg-white dark:bg-slate-800 border-r dark:border-slate-700 p-4 flex flex-col"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <div
+            class="w-10 h-10 rounded-md bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center text-white font-semibold"
+          >
+            P
+          </div>
+          <div>
+            <h1 class="text-lg font-semibold">Engenharia de Prompt</h1>
+            <p class="text-sm text-slate-500 dark:text-slate-300">
+              Curso prático — Aulas & Prompts
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <input
+            id="search"
+            type="search"
+            placeholder="Pesquisar aulas / prompts"
+            class="w-full px-3 py-2 rounded-md border bg-transparent focus:outline-none focus:ring"
+          />
+        </div>
+
+        <nav class="flex-1 overflow-auto" aria-label="Aulas">
+          <ul id="lessonsList" class="space-y-2">
+            <li
+              class="lesson-item"
+              data-video-type="youtube"
+              data-video-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              data-title="Aula 1 - Introdução"
+              data-prompts='["Prompt: A.", "Prompt: B."]'
+            >
+              <button
+                class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+              >
+                Aula 1 - Introdução
+              </button>
+            </li>
+
+            <li
+              class="lesson-item"
+              data-video-type="youtube"
+              data-video-src="https://www.youtube.com/embed/9bZkp7q19f0"
+              data-title="Aula 2 - Gangnam Style"
+              data-prompts='["Prompt: C."]'
+            >
+              <button
+                class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+              >
+                Aula 2 - Gangnam Style
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="mt-4 flex gap-2">
+          <button
+            id="downloadAll"
+            class="flex-1 px-3 py-2 rounded-md border bg-indigo-600 text-white"
+          >
+            Exportar prompts
+          </button>
+          <button
+            id="toggleTheme"
+            class="w-12 h-10 rounded-md border flex items-center justify-center"
+            title="Alternar tema"
+          >
+            🌙
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="flex-1 p-6">
+        <header class="mb-4 flex items-center justify-between">
+          <div>
+            <h2 id="lessonTitle" class="text-2xl font-semibold">
+              Selecione uma aula
+            </h2>
+            <p
+              id="lessonSubtitle"
+              class="text-sm text-slate-500 dark:text-slate-300"
+            >
+              Vídeos e prompts práticos
+            </p>
+          </div>
+        </header>
+
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 space-y-4">
+            <div
+              class="bg-white dark:bg-slate-800 rounded-xl p-4 border dark:border-slate-700"
+            >
+              <div
+                id="player"
+                class="video-aspect rounded-md overflow-hidden bg-black"
+              >
+                <div class="flex items-center justify-center h-full text-white">
+                  Nenhuma aula selecionada
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-white dark:bg-slate-800 rounded-xl p-4 border dark:border-slate-700"
+            >
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-lg font-medium">Prompts da aula</h3>
+                <div class="text-sm text-slate-500 dark:text-slate-300">
+                  Clique para copiar
+                </div>
+              </div>
+
+              <div
+                id="promptsGrid"
+                class="grid grid-cols-1 md:grid-cols-2 gap-3"
+              ></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const lessonsList = document.getElementById("lessonsList");
+      const lessonTitle = document.getElementById("lessonTitle");
+      const lessonSubtitle = document.getElementById("lessonSubtitle");
+      const player = document.getElementById("player");
+      const promptsGrid = document.getElementById("promptsGrid");
+      const search = document.getElementById("search");
+      const downloadAll = document.getElementById("downloadAll");
+
+      function clearSelection() {
+        document
+          .querySelectorAll(".lesson-item button")
+          .forEach((b) =>
+            b.classList.remove("bg-indigo-50", "dark:bg-indigo-900")
+          );
+      }
+
+      function setLesson(el) {
+        const title = el.dataset.title || "Aula";
+        const type = el.dataset.videoType || "youtube";
+        const src = el.dataset.videoSrc || "";
+        const prompts = JSON.parse(el.dataset.prompts || "[]");
+
+        lessonTitle.textContent = title;
+        lessonSubtitle.textContent =
+          type === "file" ? "Vídeo hospedado localmente" : "Vídeo (YouTube)";
+
+        // Render player
+        if (type === "youtube") {
+          player.innerHTML = `<iframe src="${src}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        } else {
+          player.innerHTML = `<video controls src="${src}" preload="metadata" playsinline></video>`;
+        }
+
+        // Render prompts
+        promptsGrid.innerHTML = "";
+        prompts.forEach((p, i) => {
+          const card = document.createElement("div");
+          card.className =
+            "prompt-card bg-slate-50 dark:bg-slate-900 border rounded-lg p-3 flex flex-col gap-2";
+          card.innerHTML = `
+          <div class="flex items-start justify-between gap-2">
+            <div class="text-sm leading-snug break-words">${escapeHtml(p)}</div>
+            <div class="flex flex-col items-end gap-2">
+              <button class="copyBtn px-2 py-1 rounded-md border text-sm">Copiar</button>
+            </div>
+          </div>
+        `;
+          promptsGrid.appendChild(card);
+        });
+
+        promptsGrid.querySelectorAll(".copyBtn").forEach((btn, i) => {
+          btn.addEventListener("click", () => {
+            navigator.clipboard.writeText(prompts[i]).then(() => {
+              btn.textContent = "Copiado";
+              setTimeout(() => (btn.textContent = "Copiar"), 1200);
+            });
+          });
+        });
+      }
+
+      function escapeHtml(text) {
+        return text
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      document.querySelectorAll(".lesson-item").forEach((li) => {
+        li.querySelector("button").addEventListener("click", (e) => {
+          clearSelection();
+          e.currentTarget.classList.add("bg-indigo-50", "dark:bg-indigo-900");
+          setLesson(li);
+        });
+      });
+
+      // Pesquisa
+      search.addEventListener("input", () => {
+        const q = search.value.toLowerCase();
+        document.querySelectorAll(".lesson-item").forEach((li) => {
+          const title = (li.dataset.title || "").toLowerCase();
+          const prompts = (li.dataset.prompts || "").toLowerCase();
+          li.style.display =
+            title.includes(q) || prompts.includes(q) ? "" : "none";
+        });
+      });
+
+      // Download dos prompts como txt
+      downloadAll.addEventListener("click", () => {
+        const items = Array.from(document.querySelectorAll(".lesson-item"));
+        let content = items
+          .map((li) => {
+            const title = li.dataset.title || "Aula";
+            const prompts = JSON.parse(li.dataset.prompts || "[]");
+            return `## ${title}\n\n${prompts
+              .map((p, i) => `${i + 1}. ${p}`)
+              .join("\n")}\n\n`;
+          })
+          .join("\n");
+
+        const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "prompts-curso.txt";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      });
+
+      /**
+       * Darkmode: configurado via tailwind.config acima
+       * Achar icones para os textos...
+       */
+      const toggleTheme = document.getElementById("toggleTheme");
+      function updateThemeIcon() {
+        toggleTheme.textContent = document.documentElement.classList.contains(
+          "dark"
+        )
+          ? "Light mode"
+          : "Dark mode";
+      }
+      toggleTheme.addEventListener("click", () => {
+        document.documentElement.classList.toggle("dark");
+        updateThemeIcon();
+      });
+      updateThemeIcon();
+
+      /**
+       * Teclas: 1/2/3/.../9, para navegar entre as aulas
+       * rever logica para mais de 9 aulas no curso
+       */
+      window.addEventListener("keydown", (e) => {
+        if (e.key >= "1" && e.key <= "9") {
+          const idx = Number(e.key) - 1;
+          const li = document.querySelectorAll(".lesson-item")[idx];
+          if (li) li.querySelector("button").click();
+        }
+      });
+    </script>
+  </body>
+</html>
