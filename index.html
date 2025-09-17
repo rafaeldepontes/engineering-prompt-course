@@ -101,16 +101,9 @@
         <div class="mt-4 flex gap-2">
           <button
             id="downloadAll"
-            class="flex-1 px-3 py-2 rounded-md border bg-indigo-600 text-white"
+            class="flex-1 px-3 py-2 rounded-md border bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-500"
           >
             Exportar prompts
-          </button>
-          <button
-            id="toggleTheme"
-            class="w-12 h-10 rounded-md border flex items-center justify-center"
-            title="Alternar tema"
-          >
-            🌙
           </button>
         </div>
       </aside>
@@ -161,6 +154,34 @@
                 class="grid grid-cols-1 md:grid-cols-2 gap-3"
               ></div>
             </div>
+          </div>
+
+          <aside class="space-y-4">
+            <div
+              class="bg-white dark:bg-slate-800 rounded-xl p-4 border dark:border-slate-700"
+            >
+              <div class="flex flex-col gap-3">
+                <img
+                  src="images/Notepad_icon.png"
+                  alt="Feedback illustration"
+                  class="max-w-full h-64 object-contain ml-12 mb-4"
+                />
+
+                <a
+                  href="https://forms.gle/bbLXzLmTb3a3zATh6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-4 py-2 text-center rounded-lg bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-semibold shadow-md hover:opacity-90 transition"
+                >
+                  Give Feedback
+                </a>
+              </div>
+            </div>
+          </aside>
+          <div
+            class="fixed bottom-3 right-4 text-xs text-slate-500 dark:text-slate-400"
+          >
+            Projeto Extensionista - Universidade de Fortaleza
           </div>
         </section>
       </main>
@@ -280,20 +301,23 @@
       /**
        * Darkmode: configurado via tailwind.config acima
        * Achar icones para os textos...
+       *
+       * Descomentar quando funcionar a porcaria do tailwind
+       *
+       * const toggleTheme = document.getElementById("toggleTheme");
+       * function updateThemeIcon() {
+       *   toggleTheme.textContent = document.documentElement.classList.contains(
+       *     "dark"
+       *   )
+       *     ? "Light mode"
+       *     : "Dark mode";
+       * }
+       * toggleTheme.addEventListener("click", () => {
+       *   document.documentElement.classList.toggle("dark");
+       *   updateThemeIcon();
+       * });
+       * updateThemeIcon();
        */
-      const toggleTheme = document.getElementById("toggleTheme");
-      function updateThemeIcon() {
-        toggleTheme.textContent = document.documentElement.classList.contains(
-          "dark"
-        )
-          ? "Light mode"
-          : "Dark mode";
-      }
-      toggleTheme.addEventListener("click", () => {
-        document.documentElement.classList.toggle("dark");
-        updateThemeIcon();
-      });
-      updateThemeIcon();
 
       /**
        * Teclas: 1/2/3/.../9, para navegar entre as aulas
