@@ -1,7 +1,10 @@
 {
   "version": 2,
-  "builds": [{ "src": "main-page.html", "use": "@vercel/static" }],
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "images/**", "use": "@vercel/static" }
+  ],
   "redirects": [
-    { "source": "/", "destination": "/main-page.html", "permanent": false }
+    { "source": "/", "destination": "/index.html", "permanent": false }
   ]
 }
