@@ -33,6 +33,11 @@
       .prompt-card:active {
         transform: translateY(2px);
       }
+
+      /* Pequena transição para o chevron */
+      .chevron {
+        transition: transform 0.14s ease;
+      }
     </style>
   </head>
   <body
@@ -67,35 +72,280 @@
         </div>
 
         <nav class="flex-1 overflow-auto" aria-label="Aulas">
-          <ul id="lessonsList" class="space-y-2">
-            <li
-              class="lesson-item"
-              data-video-type="youtube"
-              data-video-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              data-title="Aula 1 - Introdução"
-              data-prompts='["Prompt: A.", "Prompt: B."]'
-            >
+          <div id="modulesList" class="space-y-2">
+            <!-- Modulo 0 -->
+            <div class="module-item">
               <button
-                class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                class="module-toggle w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-between"
+                aria-expanded="true"
               >
-                Aula 1 - Introdução
+                <span class="font-medium"
+                  >Módulo 0: Introdução e Preparação</span
+                >
+                <svg
+                  class="chevron w-4 h-4 text-slate-600 dark:text-slate-300"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M6 8l4 4 4-4"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
               </button>
-            </li>
 
-            <li
-              class="lesson-item"
-              data-video-type="youtube"
-              data-video-src="https://www.youtube.com/embed/9bZkp7q19f0"
-              data-title="Aula 2 - Gangnam Style"
-              data-prompts='["Prompt: C."]'
-            >
+              <ul class="module-lessons mt-2 space-y-1 pl-1">
+                <li
+                  class="lesson-item"
+                  data-video-type="youtube"
+                  data-video-src=""
+                  data-title="Aula 0.1 - Boas-vindas e objetivos"
+                  data-prompts='["Prompt: A.", "Prompt: B."]'
+                >
+                  <button
+                    class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    Aula 0.1 - Boas-vindas e objetivos
+                  </button>
+                </li>
+
+                <li
+                  class="lesson-item"
+                  data-video-type="youtube"
+                  data-video-src=""
+                  data-title="Aula 0.2 - Acessando as LLMs e limites"
+                  data-prompts='["Prompt: C."]'
+                >
+                  <button
+                    class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    Aula 0.2 - Acessando as LLMs e limites
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Modulo 1 -->
+            <div class="module-item">
               <button
-                class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                class="module-toggle w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-between"
+                aria-expanded="false"
               >
-                Aula 2 - Gangnam Style
+                <span class="font-medium"
+                  >Módulo 1: Fundamentos de Engenharia de Prompt</span
+                >
+                <svg
+                  class="chevron w-4 h-4 text-slate-600 dark:text-slate-300"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M6 8l4 4 4-4"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
               </button>
-            </li>
-          </ul>
+
+              <ul class="module-lessons mt-2 space-y-1 pl-1 hidden">
+                <li
+                  class="lesson-item"
+                  data-video-type="youtube"
+                  data-video-src=""
+                  data-title="Aula 1.1 - O que é um prompt e como LLMs funcionam"
+                  data-prompts='["Prompt: D.", "Prompt: E."]'
+                >
+                  <button
+                    class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    Aula 1.1 - O que é um prompt e como LLMs funcionam
+                  </button>
+                </li>
+
+                <li
+                  class="lesson-item"
+                  data-video-type="youtube"
+                  data-video-src=""
+                  data-title="Aula 1.2 - Estrutura e técnicas básicas"
+                  data-prompts='["Prompt: F."]'
+                >
+                  <button
+                    class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    Aula 1.2 - Estrutura e técnicas básicas
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Modulo 2 -->
+            <div class="module-item">
+              <button
+                class="module-toggle w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-between"
+                aria-expanded="false"
+              >
+                <span class="font-medium"
+                  >Módulo 2: Boas práticas para tarefas de programação</span
+                >
+                <svg
+                  class="chevron w-4 h-4 text-slate-600 dark:text-slate-300"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M6 8l4 4 4-4"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </button>
+
+              <ul class="module-lessons mt-2 space-y-1 pl-1 hidden">
+                <li
+                  class="lesson-item"
+                  data-video-type="youtube"
+                  data-video-src=""
+                  data-title="Aula 2.1 - Como pedir código corretamente"
+                  data-prompts='["Prompt: D.", "Prompt: E."]'
+                >
+                  <button
+                    class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    Aula 2.1 - Como pedir código corretamente
+                  </button>
+                </li>
+
+                <li
+                  class="lesson-item"
+                  data-video-type="youtube"
+                  data-video-src=""
+                  data-title="Aula 2.2 - Incluir contexto de projeto"
+                  data-prompts='["Prompt: F."]'
+                >
+                  <button
+                    class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    Aula 2.2 - Incluir contexto de projeto
+                  </button>
+                </li>
+
+                <li
+                  class="lesson-item"
+                  data-video-type="youtube"
+                  data-video-src=""
+                  data-title="Aula 2.3 - Refatoração, correção e testes"
+                  data-prompts='["Prompt: D.", "Prompt: E."]'
+                >
+                  <button
+                    class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    Aula 2.3 - Refatoração, correção e testes
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Modulo 3 -->
+            <div class="module-item">
+              <button
+                class="module-toggle w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-between"
+                aria-expanded="false"
+              >
+                <span class="font-medium">Módulo 3: Fluxo de trabalho</span>
+                <svg
+                  class="chevron w-4 h-4 text-slate-600 dark:text-slate-300"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M6 8l4 4 4-4"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </button>
+
+              <ul class="module-lessons mt-2 space-y-1 pl-1 hidden">
+                <li
+                  class="lesson-item"
+                  data-video-type="youtube"
+                  data-video-src=""
+                  data-title="Aula 3.1 - Geração de código e interpretação"
+                  data-prompts='["Prompt: D.", "Prompt: E."]'
+                >
+                  <button
+                    class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    Aula 3.1 - Geração de código e interpretação
+                  </button>
+                </li>
+
+                <li
+                  class="lesson-item"
+                  data-video-type="youtube"
+                  data-video-src=""
+                  data-title="Aula 3.2 - Debug com LLMs e testes"
+                  data-prompts='["Prompt: F."]'
+                >
+                  <button
+                    class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    Aula 3.2 - Debug com LLMs e testes
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Modulo 4 -->
+            <div class="module-item">
+              <button
+                class="module-toggle w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-between"
+                aria-expanded="false"
+              >
+                <span class="font-medium"
+                  >Módulo 4: Produtividade no dia a dia do dev</span
+                >
+                <svg
+                  class="chevron w-4 h-4 text-slate-600 dark:text-slate-300"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M6 8l4 4 4-4"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </button>
+
+              <ul class="module-lessons mt-2 space-y-1 pl-1 hidden">
+                <li
+                  class="lesson-item"
+                  data-video-type="youtube"
+                  data-video-src=""
+                  data-title="Aula 4.1 - Templates de prompts"
+                  data-prompts='["Prompt: D.", "Prompt: E."]'
+                >
+                  <button
+                    class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    Aula 4.1 - Templates de prompts
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </nav>
 
         <div class="mt-4 flex gap-2">
@@ -190,7 +440,7 @@
     </div>
 
     <script>
-      const lessonsList = document.getElementById("lessonsList");
+      const modulesList = document.getElementById("modulesList");
       const lessonTitle = document.getElementById("lessonTitle");
       const lessonSubtitle = document.getElementById("lessonSubtitle");
       const player = document.getElementById("player");
@@ -214,7 +464,7 @@
 
         lessonTitle.textContent = title;
         lessonSubtitle.textContent =
-          type === "file" ? "Vídeo hospedado localmente" : "Vídeo (YouTube)";
+          type === "file" ? "Vídeo hospedado localmente" : "Aula - YouTube";
 
         // Render player
         if (type === "youtube") {
@@ -251,28 +501,89 @@
       }
 
       function escapeHtml(text) {
-        return text
+        return String(text)
           .replace(/&/g, "&amp;")
           .replace(/</g, "&lt;")
           .replace(/>/g, "&gt;");
       }
 
-      document.querySelectorAll(".lesson-item").forEach((li) => {
-        li.querySelector("button").addEventListener("click", (e) => {
-          clearSelection();
-          e.currentTarget.classList.add("bg-indigo-50", "dark:bg-indigo-900");
-          setLesson(li);
+      function attachLessonHandlers() {
+        document.querySelectorAll(".lesson-item").forEach((li) => {
+          const btn = li.querySelector("button");
+          if (!btn._hasHandler) {
+            btn.addEventListener("click", (e) => {
+              clearSelection();
+              e.currentTarget.classList.add(
+                "bg-indigo-50",
+                "dark:bg-indigo-900"
+              );
+              setLesson(li);
+            });
+            btn._hasHandler = true;
+          }
         });
+      }
+
+      // Logica para a expansao dos modulos, nao modificar...
+      document.querySelectorAll(".module-toggle").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const ul = btn.nextElementSibling;
+          const expanded = btn.getAttribute("aria-expanded") === "true";
+          if (expanded) {
+            ul.classList.add("hidden");
+            btn.setAttribute("aria-expanded", "false");
+            const svg = btn.querySelector(".chevron");
+            if (svg) svg.style.transform = "";
+          } else {
+            ul.classList.remove("hidden");
+            btn.setAttribute("aria-expanded", "true");
+            const svg = btn.querySelector(".chevron");
+            if (svg) svg.style.transform = "rotate(180deg)";
+          }
+        });
+
+        const open = btn.getAttribute("aria-expanded") === "true";
+        const svg = btn.querySelector(".chevron");
+        if (svg) svg.style.transform = open ? "rotate(180deg)" : "";
       });
+
+      attachLessonHandlers();
 
       // Pesquisa
       search.addEventListener("input", () => {
-        const q = search.value.toLowerCase();
+        const q = search.value.trim().toLowerCase();
+
         document.querySelectorAll(".lesson-item").forEach((li) => {
           const title = (li.dataset.title || "").toLowerCase();
           const prompts = (li.dataset.prompts || "").toLowerCase();
-          li.style.display =
-            title.includes(q) || prompts.includes(q) ? "" : "none";
+          const match = title.includes(q) || prompts.includes(q);
+          li.style.display = match ? "" : "none";
+        });
+
+        document.querySelectorAll(".module-item").forEach((module) => {
+          const lessons = module.querySelectorAll(".lesson-item");
+          let anyVisible = false;
+          lessons.forEach((l) => {
+            if (l.style.display !== "none") anyVisible = true;
+          });
+
+          const ul = module.querySelector(".module-lessons");
+          const toggle = module.querySelector(".module-toggle");
+          if (!anyVisible) {
+            module.style.display = "none";
+          } else {
+            module.style.display = "";
+            // Qualidade de Vida, pensar em como refatorar no futuro
+            // se a gente for remover a barra de pesquisa
+            if (q !== "") {
+              ul.classList.remove("hidden");
+              if (toggle) {
+                toggle.setAttribute("aria-expanded", "true");
+                const svg = toggle.querySelector(".chevron");
+                if (svg) svg.style.transform = "rotate(180deg)";
+              }
+            }
+          }
         });
       });
 
@@ -301,37 +612,26 @@
       });
 
       /**
-       * Darkmode: configurado via tailwind.config acima
-       * Achar icones para os textos...
-       *
-       * Descomentar quando funcionar a porcaria do tailwind
-       *
-       * const toggleTheme = document.getElementById("toggleTheme");
-       * function updateThemeIcon() {
-       *   toggleTheme.textContent = document.documentElement.classList.contains(
-       *     "dark"
-       *   )
-       *     ? "Light mode"
-       *     : "Dark mode";
-       * }
-       * toggleTheme.addEventListener("click", () => {
-       *   document.documentElement.classList.toggle("dark");
-       *   updateThemeIcon();
-       * });
-       * updateThemeIcon();
-       */
-
-      /**
        * Teclas: 1/2/3/.../9, para navegar entre as aulas
        * rever logica para mais de 9 aulas no curso
        */
       window.addEventListener("keydown", (e) => {
         if (e.key >= "1" && e.key <= "9") {
           const idx = Number(e.key) - 1;
-          const li = document.querySelectorAll(".lesson-item")[idx];
+          // Só considerar aulas visíveis na UI
+          const visibleLessons = Array.from(
+            document.querySelectorAll(".lesson-item")
+          ).filter((li) => li.style.display !== "none");
+          const li = visibleLessons[idx];
           if (li) li.querySelector("button").click();
         }
       });
+
+      /**
+       * Se alterar o codigo para gerar / adicionar modulos dinamicamente no futuro,
+       * usa o attachLessonHandlers() novamente para ligar os handlers.
+       * Isso deve evitar de fazer alguma cagada no body do site.......
+       */
     </script>
   </body>
 </html>
