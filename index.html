@@ -34,9 +34,44 @@
         transform: translateY(2px);
       }
 
-      /* Pequena transição para o chevron */
       .chevron {
         transition: transform 0.14s ease;
+      }
+
+      .module-lessons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .lesson-item > button {
+        transition: transform 0.14s ease, box-shadow 0.14s ease,
+          background-color 0.14s ease;
+        position: relative;
+        will-change: transform, box-shadow;
+      }
+
+      .lesson-item > button:hover,
+      .lesson-item > button:focus {
+        transform: translateX(3px);
+      }
+
+      .lesson-item > button.selected {
+        transform: translateX(8px);
+        box-shadow: 0 10px 24px rgba(2, 6, 23, 0.08);
+        border-left: 4px solid rgba(99, 102, 241, 1);
+        padding-left: calc(1rem - 4px);
+        background-color: rgba(99, 102, 241, 0.06);
+      }
+
+      .dark .lesson-item > button.selected {
+        box-shadow: 0 8px 20px rgba(2, 6, 23, 0.28);
+        background-color: rgba(99, 102, 241, 0.12);
+      }
+
+      .lesson-item > button:focus {
+        outline: 3px solid rgba(99, 102, 241, 0.18);
+        outline-offset: 2px;
       }
     </style>
   </head>
@@ -108,7 +143,7 @@
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
                   >
-                    Aula 0.1 - Boas-vindas e objetivos
+                    → Aula 0.1 - Boas-vindas e objetivos
                   </button>
                 </li>
 
@@ -122,7 +157,7 @@
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
                   >
-                    Aula 0.2 - Acessando as LLMs e limites
+                    → Aula 0.2 - Acessando as LLMs e limites
                   </button>
                 </li>
               </ul>
@@ -163,7 +198,7 @@
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
                   >
-                    Aula 1.1 - O que é um prompt e como LLMs funcionam
+                    → Aula 1.1 - O que é um prompt e como LLMs funcionam
                   </button>
                 </li>
 
@@ -177,7 +212,7 @@
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
                   >
-                    Aula 1.2 - Estrutura e técnicas básicas
+                    → Aula 1.2 - Estrutura e técnicas básicas
                   </button>
                 </li>
               </ul>
@@ -218,7 +253,7 @@
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
                   >
-                    Aula 2.1 - Como pedir código corretamente
+                    → Aula 2.1 - Como pedir código corretamente
                   </button>
                 </li>
 
@@ -232,7 +267,7 @@
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
                   >
-                    Aula 2.2 - Incluir contexto de projeto
+                    → Aula 2.2 - Incluir contexto de projeto
                   </button>
                 </li>
 
@@ -246,7 +281,7 @@
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
                   >
-                    Aula 2.3 - Refatoração, correção e testes
+                    → Aula 2.3 - Refatoração, correção e testes
                   </button>
                 </li>
               </ul>
@@ -285,7 +320,7 @@
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
                   >
-                    Aula 3.1 - Geração de código e interpretação
+                    → Aula 3.1 - Geração de código e interpretação
                   </button>
                 </li>
 
@@ -299,7 +334,7 @@
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
                   >
-                    Aula 3.2 - Debug com LLMs e testes
+                    → Aula 3.2 - Debug com LLMs e testes
                   </button>
                 </li>
               </ul>
@@ -340,7 +375,7 @@
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
                   >
-                    Aula 4.1 - Templates de prompts
+                    → Aula 4.1 - Templates de prompts
                   </button>
                 </li>
               </ul>
@@ -449,11 +484,11 @@
       const downloadAll = document.getElementById("downloadAll");
 
       function clearSelection() {
-        document
-          .querySelectorAll(".lesson-item button")
-          .forEach((b) =>
-            b.classList.remove("bg-indigo-50", "dark:bg-indigo-900")
-          );
+        document.querySelectorAll(".lesson-item button").forEach((b) => {
+          b.classList.remove("bg-indigo-50", "dark:bg-indigo-900");
+          b.classList.remove("selected");
+          b.removeAttribute("aria-selected");
+        });
       }
 
       function setLesson(el) {
@@ -517,6 +552,8 @@
                 "bg-indigo-50",
                 "dark:bg-indigo-900"
               );
+              e.currentTarget.classList.add("selected");
+              e.currentTarget.setAttribute("aria-selected", "true");
               setLesson(li);
             });
             btn._hasHandler = true;
