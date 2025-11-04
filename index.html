@@ -135,7 +135,7 @@
                 <li
                   class="lesson-item"
                   data-video-type="youtube"
-                  data-video-src=""
+                  data-video-src="https://www.youtube.com/embed/J7xbU3JUzE4?si=yS1evBU9hz0QJGFm"
                   data-title="Aula 0.1 - Boas-vindas e objetivos"
                   data-prompts='["Prompt: A.", "Prompt: B."]'
                 >
@@ -149,7 +149,7 @@
                 <li
                   class="lesson-item"
                   data-video-type="youtube"
-                  data-video-src=""
+                  data-video-src="https://www.youtube.com/embed/W6MKCjWTXf8?si=ZxsIv22qQvovdpjZ"
                   data-title="Aula 0.2 - Acessando as LLMs e limites"
                   data-prompts='["Prompt: C."]'
                 >
@@ -190,7 +190,7 @@
                 <li
                   class="lesson-item"
                   data-video-type="youtube"
-                  data-video-src=""
+                  data-video-src="https://www.youtube.com/embed/gfhiVsjdgxw?si=oS4gRtjMymq4j0bp"
                   data-title="Aula 1.1 - O que é um prompt e como LLMs funcionam"
                   data-prompts='["Prompt: D.", "Prompt: E."]'
                 >
@@ -204,7 +204,7 @@
                 <li
                   class="lesson-item"
                   data-video-type="youtube"
-                  data-video-src=""
+                  data-video-src="https://www.youtube.com/embed/-nWk6NZoqMc?si=gLVxNiPk9IVdc7m7"
                   data-title="Aula 1.2 - Estrutura e técnicas básicas"
                   data-prompts='["Prompt: F."]'
                 >
@@ -245,7 +245,7 @@
                 <li
                   class="lesson-item"
                   data-video-type="youtube"
-                  data-video-src=""
+                  data-video-src="https://www.youtube.com/embed/8W5T1UWoq9g?si=U2N4o6xm23lr_Nsv"
                   data-title="Aula 2.1 - Como pedir código corretamente"
                   data-prompts='["Prompt: D.", "Prompt: E."]'
                 >
@@ -259,7 +259,7 @@
                 <li
                   class="lesson-item"
                   data-video-type="youtube"
-                  data-video-src=""
+                  data-video-src="https://www.youtube.com/embed/nCCCeeQM0LE?si=7WCn10tObKXb3RXL"
                   data-title="Aula 2.2 - Incluir contexto de projeto"
                   data-prompts='["Prompt: F."]'
                 >
@@ -502,7 +502,17 @@
 
         // Render player
         if (type === "youtube") {
-          player.innerHTML = `<iframe src="${src}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+          //player.innerHTML = `<iframe src="${src}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+          player.innerHTML = `
+            <iframe 
+              src="${src}" 
+              title="${title}" 
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            </iframe>
+          `;
         } else {
           player.innerHTML = `<video controls src="${src}" preload="metadata" playsinline></video>`;
         }
