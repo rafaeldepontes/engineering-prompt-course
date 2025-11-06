@@ -137,7 +137,6 @@
                   data-video-type="youtube"
                   data-video-src="https://www.youtube.com/embed/J7xbU3JUzE4?si=yS1evBU9hz0QJGFm"
                   data-title="Aula 0.1 - Boas-vindas e objetivos"
-                  data-prompts='["Prompt: A.", "Prompt: B."]'
                 >
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
@@ -151,7 +150,6 @@
                   data-video-type="youtube"
                   data-video-src="https://www.youtube.com/embed/W6MKCjWTXf8?si=ZxsIv22qQvovdpjZ"
                   data-title="Aula 0.2 - Acessando as LLMs e limites"
-                  data-prompts='["Prompt: C."]'
                 >
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
@@ -192,7 +190,6 @@
                   data-video-type="youtube"
                   data-video-src="https://www.youtube.com/embed/gfhiVsjdgxw?si=oS4gRtjMymq4j0bp"
                   data-title="Aula 1.1 - O que é um prompt e como LLMs funcionam"
-                  data-prompts='["Prompt: D.", "Prompt: E."]'
                 >
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
@@ -206,7 +203,11 @@
                   data-video-type="youtube"
                   data-video-src="https://www.youtube.com/embed/-nWk6NZoqMc?si=gLVxNiPk9IVdc7m7"
                   data-title="Aula 1.2 - Estrutura e técnicas básicas"
-                  data-prompts='["Prompt: F."]'
+                  data-prompts='[
+                                  "Zero-Shot:\nVocê é um {role}.\n\nObjetivo: {objective}.\n\nContexto: {context}.\n\nRequisitos: {requirements}.\n\nFormato de saída: {output_format}.\n\nExemplo esperado: {example_cases}.\n\nEscreva a função agora.",
+                                  "One-Shot:\nVocê é um {role}.\n\nExemplo de função (estilo desejado):\n{example_function}\n\nObjetivo: agora escreva {target_function_name}({target_param}) seguindo o mesmo estilo (docstring curta, validação de tipo, comportamento/formatos esperados).\n\nContexto: {context}.\n\nRequisitos: {requirements}.\n\nFormato de saída: {output_format}.",
+                                  "Few-Shot:\nVocê é um {role}.\n\nVeja exemplos do formato que quero:\n{example_function_1}\n\n{example_function_2}\n{optional_more_examples}\n\nObjetivo: escreva {target_function_name}({target_param}) seguindo estritamente o mesmo estilo (docstring curta, validação de tipo com TypeError, uso de round(..., {decimals}) para saída, etc).\n\nContexto: {context}.\n\nRequisitos: {requirements}.\n\nFormato de saída: {output_format}.\n\nObservação: inclua {extra_output_requirement} quando aplicável (ex.: duas linhas comentadas com exemplos de uso)."
+                                ]'
                 >
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
@@ -247,7 +248,6 @@
                   data-video-type="youtube"
                   data-video-src="https://www.youtube.com/embed/8W5T1UWoq9g?si=U2N4o6xm23lr_Nsv"
                   data-title="Aula 2.1 - Como pedir código corretamente"
-                  data-prompts='["Prompt: D.", "Prompt: E."]'
                 >
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
@@ -261,7 +261,7 @@
                   data-video-type="youtube"
                   data-video-src="https://www.youtube.com/embed/nCCCeeQM0LE?si=7WCn10tObKXb3RXL"
                   data-title="Aula 2.2 - Incluir contexto de projeto"
-                  data-prompts='["Prompt: F."]'
+                  data-prompts='["Utilizando esses dois códigos como base:\n```{language}\n{example_1}\n```\n\n```{language}\n{example_2}\n```\n\nFaça o teste unitário utilizando {lib/framework_1, lib/framework_2...}, com pelo menos {N} casos para {situacional}:\n```{language}\n{real_code}\n```"]'
                 >
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
@@ -275,7 +275,9 @@
                   data-video-type="youtube"
                   data-video-src="https://www.youtube.com/embed/0jrS3pEsOoY?si=WtHq_NyS0C6mnxgk"
                   data-title="Aula 2.3 - Refatoração, correção e testes"
-                  data-prompts='["Prompt: D.", "Prompt: E."]'
+                  data-prompts='[
+                                  "Dado o código em {language} na versão {version}:\n```{language}\n{example}\n```\n\nCorrija o erro do stack trace:\n```log\n{cole a stack trace}\n```"
+                                ]'
                 >
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
@@ -312,9 +314,11 @@
                 <li
                   class="lesson-item"
                   data-video-type="youtube"
-                  data-video-src=""
+                  data-video-src="https://www.youtube.com/embed/qMp8XMeagb4?si=hTflreHtX27zXl21"
                   data-title="Aula 3.1 - Geração de código e interpretação"
-                  data-prompts='["Prompt: D.", "Prompt: E."]'
+                  data-prompts='[
+                                  "Escreva um algoritmo para {task_description}.\n\nLinguagem: {language}\nVersão: {version}\n\nInput:\n{input_description}\n\nOutput:\n{output_description}\n\nRequisitos:\n{requirements}\n\nRestrições:\n{constraints}\n\nFormato de entrega:\n- Código funcional completo na linguagem especificada.\n- Sem explicações, apenas o código.\n- Inclua um exemplo mínimo de uso da função.\n\nObjetivo:\n{goal_summary}."
+                                ]'
                 >
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
@@ -328,7 +332,6 @@
                   data-video-type="youtube"
                   data-video-src="https://www.youtube.com/embed/ibwCB8EDD1Y?si=XMy4ZvyXtqCBgG1R"
                   data-title="Aula 3.2 - Debug com LLMs e testes"
-                  data-prompts='["Prompt: F."]'
                 >
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
@@ -369,7 +372,12 @@
                   data-video-type="youtube"
                   data-video-src="https://www.youtube.com/embed/2jyb9GXLp_Y?si=S0Sp_-Ktt79T3BWK"
                   data-title="Aula 4.1 - Templates de prompts"
-                  data-prompts='["Prompt: D.", "Prompt: E."]'
+                  data-prompts='[
+                                  "Refatorar:\n{file_path_or_code_snippet}\n\nLinguagem: {language}\nVersão: {version}\n\nObjetivo:\n// ex: melhorar legibilidade, reduzir complexidade, remover duplicação mantendo comportamento\n{goal_summary}\n\nEscopo:\n- Funções/métodos: {list}\n- Arquivos: {list}\n- Limitações: {what_not_to_change}\n\nInvariantes a preservar:\n- Comportamento público: {api_contracts}\n- Casos de borda: {edge_cases}\n- Performance máxima aceitável: {perf_constraints}\n\nRequisitos:\n// ex: manter cobertura de testes, compatibilidade com X\n{requirements}\n\nFormato de entrega:\n- Código refatorado (arquivos completos).\n- Inclua testes que provem equivalência comportamental (se aplicável).\n- Sem explicações, apenas o código e um breve comentário no topo de cada arquivo indicando alteração.\n- Exemplo mínimo de uso / comando para rodar testes.\n\nObjetivo curto:\n{one_line_goal}",
+                                  "Nova funcionalidade: {feature_name}\n\nLinguagem: {language}\nVersão: {version}\n\nDescrição:\n{detailed_description_of_feature}\n\nEntrada esperada:\n{input_schema_or_params}\n\nSaída esperada:\n{output_schema_or_behavior}\n\nRequisitos funcionais:\n- {req1}\n- {req2}\n\nRequisitos não-funcionais:\n- {nf_req1}  // ex: tempo de resposta, segurança, compatibilidade\n\nDependências/autorizadas:\n{allowed_libs_or_services}\n\nRestrições:\n- Não quebrar API existente: {api_contract}\n- Não usar {disallowed}\n\nFormato de entrega:\n- Patch/arquivos modificados completos.\n- Testes automatizados cobrindo comportamento principal.\n- Exemplo mínimo de uso (snippet) e comando para rodar.\n- Sem explicações além de um breve PR description (máx 3 linhas).\n\nObjetivo:\n{one_line_goal}",
+                                  "Testar:\n{file_path_or_code_snippet}\n\nLinguagem: {language}\nFramework de testes: {framework_and_version}\n\nTipo de teste:\n{unit | integration | e2e}\n\nCobertura alvo:\n{percent_or_list_of_features}  // ex: 80% ou endpoints X,Y,Z\n\nCasos obrigatórios:\n- Cenário feliz: {description}\n- Erros esperados: {list}\n- Casos de borda: {list}\n\nMocks / Stubs:\n{what_to_mock_and_how}\n\nDados de entrada / saídas esperadas (exemplos):\n- Input: {example_input} -> Output: {expected_output}\n\nFormato de entrega:\n- Arquivos de teste prontos (localizados em {test_path}).\n- Comando para rodar: {run_command}.\n- Sem explicações, apenas testes e fixtures necessárias.\n\nObjetivo:\n{one_line_goal}",
+                                  "README: {project_name}\n\nLinguagem: {language}\nVersão: {version}\nRepositório: {repo_path_or_url}\n\nDescrição:\n{one_line_summary}\n\nInstalação (mínima):\n1. {step1}\n2. {step2}\n3. {step3}\n\nDependências principais:\n- {dep1}\n- {dep2}\n\nConfiguração / Variáveis de ambiente (obrigatórias):\n- {KEY}=value — {purpose}\n- {KEY_OPT}=value — (opcional) {purpose}\n\nComandos essenciais:\n- Start: {start_command}\n- Test: {test_command}\n- Build: {build_command}\n- Lint: {lint_command}\n\nUso (exemplo mínimo):\n```bash\n{minimal_run_example_or_curl}\n```\n\nAPI / Endpoints / CLI (resumo):\n- {METHOD / PATH} -> {brief_purpose}\n- {command} -> {brief_purpose}\n\nTestes:\n- Tipo: {unit|integration|e2e}\n- Comando: {test_command}\n- Cobertura alvo: {percent_or_scope}\n\nDeploy (rápido):\n- {one-line_deploy_instructions}  // ex: docker build && docker run or cloud provider step\n\nEstrutura mínima do projeto:\n- {important_file_or_dir}: {purpose}\n- {important_file_or_dir}: {purpose}\n\nComo contribuir (brevíssimo):\n- Fork -> branch `{branch_name}` -> PR com descrição curta (máx 3 linhas) -> testes verdes\n\nLicença:\n{license}\n\nFormato de entrega:\n- `README.md` em Markdown pronto para uso.\n- Máximo ~300–400 palavras; foco em instalação, uso e comandos.\n- Sem explicações extras, apenas o conteúdo do README.\n\nObjetivo:\n{one_line_goal}"
+                                ]'
                 >
                   <button
                     class="w-full text-left px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700"
